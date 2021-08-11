@@ -25,10 +25,12 @@ class SubPriceDepthService:
             price_depth_event_obj.tick = PriceDepth.json_parse(tick)
             return price_depth_event_obj
 
-        SubscribeClient(**kwargs).execute_subscribe_v1(subscription,
-                                            parse,
-                                            callback,
-                                            error_handler)
+        sub_client = SubscribeClient(**kwargs)
+        sub_client.execute_subscribe_v1(subscription,
+                                        parse,
+                                        callback,
+                                        error_handler)
+        return sub_client
 
 
 
