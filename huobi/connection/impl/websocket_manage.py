@@ -117,7 +117,8 @@ class WebsocketManage:
 
     def close(self):
         self.original_connection.close()
-        del websocket_connection_handler[self.original_connection]
+        if self.original_connection in websocket_connection_handler:
+            del websocket_connection_handler[self.original_connection]
         self.state = ConnectionState.CLOSED
         self.logger.info("[Sub][" + str(self.id) + "] Closing normally")
 
@@ -258,14 +259,14 @@ class WebsocketManage:
     def __process_ping_on_trading_line(self, ping_ts):
         #print("### __process_ping_on_trading_line ###")
         #self.send("{\"op\":\"pong\",\"ts\":" + str(get_current_timestamp()) + "}")
-        PrintBasic.print_basic(ping_ts, "response time")
+        #PrintBasic.print_basic(ping_ts, "response time")
         self.send("{\"op\":\"pong\",\"ts\":" + str(ping_ts) + "}")
         return
 
     def __process_ping_on_market_line(self, ping_ts):
         #print("### __process_ping_on_market_line ###")
         #self.send("{\"pong\":" + str(get_current_timestamp()) + "}")
-        PrintBasic.print_basic(ping_ts, "response time")
+        #PrintBasic.print_basic(ping_ts, "response time")
         self.send("{\"pong\":" + str(ping_ts) + "}")
         return
 
