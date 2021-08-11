@@ -53,6 +53,7 @@ class WebSocketWatchDog(threading.Thread):
     def on_connection_closed(self, websocket_manage):
         self.mutex.acquire()
         self.websocket_manage_list.remove(websocket_manage)
+        self.scheduler.shutdown()
         self.mutex.release()
 
     # calculate next reconnect time
