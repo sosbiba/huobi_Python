@@ -175,7 +175,7 @@ class MarketClient(object):
         }
 
         from huobi.service.market.sub_pricedepth import SubPriceDepthService
-        SubPriceDepthService(params).subscribe(callback, error_handler, **self.__kwargs)
+        return SubPriceDepthService(params).subscribe(callback, error_handler, **self.__kwargs)
 
     def sub_pricedepth_bbo(self, symbols: 'str', callback, error_handler=None):
         """
